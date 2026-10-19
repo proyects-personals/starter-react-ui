@@ -1,34 +1,118 @@
-name: Release
+name: Automatic Release
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
-  issues: write
-  pull-requests: write
+
+concurrency:
+  group: automatic-release
+  cancel-in-progress: false
 
 jobs:
   release:
+    name: Calculate version and release
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Install dependencies
-        run: npm install
+      - name: Calculate and apply version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
 
-      - name: Semantic Release
+          git fetch --tags origin
+
+          LAST_TAG="$(git tag --list 'v[0-9]*' --sort=-version:refname | head -n 1)"
+
+          if [[ -z "$LAST_TAG" ]]; then
+            NEXT_VERSION="1.0.0"
+            echo "First release: $NEXT_VERSION"
+          else
+            CURRENT_VERSION="${LAST_TAG#v}"
+
+            if ! [[ "$CURRENT_VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              echo "::error::Unsupported version tag: $LAST_TAG"
+              exit 1
+            fi
+
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            PATCH="${BASH_REMATCH[3]}"
+
+            COMMITS="$(git log "${LAST_TAG}..HEAD" --format='%s%n%b%n---END-COMMIT---')"
+
+            if [[ -z "$COMMITS" ]]; then
+              echo "No commits found since $LAST_TAG."
+              echo "release_needed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            if grep -Eq '^[[:alnum:]-]+(\([^)]*\))?!:|BREAKING CHANGE:|BREAKING-CHANGE:' <<< "$COMMITS"; then
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+            elif grep -Eq '^feat(\([^)]*\))?:' <<< "$COMMITS"; then
+              MINOR=$((MINOR + 1))
+              PATCH=0
+            elif grep -Eq '^(fix|perf)(\([^)]*\))?:' <<< "$COMMITS"; then
+              PATCH=$((PATCH + 1))
+            else
+              echo "No release-worthy commits since $LAST_TAG."
+              echo "release_needed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            NEXT_VERSION="$MAJOR.$MINOR.$PATCH"
+          fi
+
+          TAG="v$NEXT_VERSION"
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "::error::Tag $TAG already exists."
+            exit 1
+          fi
+
+          npm pkg set "version=$NEXT_VERSION"
+
+          if ! git diff --quiet -- package.json; then
+            git add package.json
+            git commit -m "chore(release): $NEXT_VERSION"
+            git push origin HEAD:main
+          fi
+
+          git tag "$TAG"
+          git push origin "$TAG"
+
+          echo "version=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "release_needed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        if: steps.version.outputs.release_needed == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes
+
+          echo "Released version $VERSION"
