@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
+    "skipLibCheck": true,
+
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    "paths": {
+      "@": ["./src/index.ts"],
+      "@/*": ["./src/*"],
+
+      "@aplicacion": ["./src/libs/aplicacion/index.ts"],
+      "@aplicacion/*": ["./src/libs/aplicacion/*"],
+
+      "@domain": ["./src/libs/domain/index.ts"],
+      "@domain/*": ["./src/libs/domain/*"],
+
+      "@infraestructura": ["./src/libs/infraestructura/index.ts"],
+      "@infraestructura/*": ["./src/libs/infraestructura/*"],
+
+      "@components": ["./src/libs/components/index.ts"],
+      "@components/*": ["./src/libs/components/*"],
+
+      "@assets/*": ["./src/assets/*"],
+
+      "@styles": ["./src/libs/components/styles/index.ts"],
+      "@styles/*": ["./src/libs/components/styles/*"]
+    },
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
