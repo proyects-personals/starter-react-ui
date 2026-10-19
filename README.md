@@ -1,7 +1,8 @@
-
 # React UI Library
 
-Librería de componentes reutilizables desarrollada con **React, TypeScript y Vite**, diseñada para proporcionar una base de interfaz consistente, personalizable y mantenible para aplicaciones React.
+Librería de componentes reutilizables desarrollada con **React, TypeScript y
+Vite**, diseñada para proporcionar una base de interfaz consistente,
+personalizable y mantenible para aplicaciones React.
 
 ## ✨ Características
 
@@ -12,8 +13,10 @@ Librería de componentes reutilizables desarrollada con **React, TypeScript y Vi
 - **ESLint:** validación automática de la calidad del código.
 - **Prettier:** formato consistente del código.
 - **Conventional Commits:** estandarización de los mensajes de commit.
-- **Git Hooks:** ejecución automática de validaciones antes de confirmar cambios.
-- **Distribución privada:** generación de paquetes instalables en formato `.tgz`.
+- **Git Hooks:** ejecución automática de validaciones antes de confirmar
+  cambios.
+- **Distribución privada:** generación de paquetes instalables en formato
+  `.tgz`.
 - **GitHub Actions:** automatización de validaciones y generación de artefactos.
 
 ## 📋 Requisitos
@@ -42,11 +45,13 @@ Instálalo en otra aplicación React:
 npm install ../ruta-de-la-libreria/resources/react-ui-0.0.0.tgz
 ```
 
-Reemplaza la ruta y el nombre del archivo por los valores reales generados por el proyecto.
+Reemplaza la ruta y el nombre del archivo por los valores reales generados por
+el proyecto.
 
 ### Instalar desde un registro privado de npm
 
-Si la librería se publica en GitHub Packages, configura el registro en el archivo `.npmrc` del proyecto consumidor:
+Si la librería se publica en GitHub Packages, configura el registro en el
+archivo `.npmrc` del proyecto consumidor:
 
 ```ini
 @tu-organizacion:registry=https://npm.pkg.github.com
@@ -59,9 +64,11 @@ Instala la librería:
 npm install @tu-organizacion/react-ui
 ```
 
-Reemplaza el nombre de la organización y el paquete por los valores definidos en `package.json`.
+Reemplaza el nombre de la organización y el paquete por los valores definidos en
+`package.json`.
 
-> Generar un archivo `.tgz` no publica automáticamente la librería en un registro. La publicación debe configurarse por separado.
+> Generar un archivo `.tgz` no publica automáticamente la librería en un
+> registro. La publicación debe configurarse por separado.
 
 Nunca guardes tokens de autenticación directamente en el repositorio.
 
@@ -95,22 +102,24 @@ npm run preview
 
 ## 📦 Scripts disponibles
 
-| Comando | Descripción |
-|---|---|
-| `npm run dev` | Inicia el servidor de desarrollo de Vite. |
-| `npm run build` | Compila la aplicación o librería según la configuración de Vite. |
-| `npm run preview` | Previsualiza la compilación de producción. |
-| `npm run lint` | Ejecuta ESLint para validar el código. |
-| `npm run format` | Formatea los archivos con Prettier. |
-| `npm run format:check` | Comprueba el formato sin modificar archivos. |
-| `npm run package:lib` | Ejecuta el proceso de empaquetado de la librería. |
-| `npm run prepare` | Inicializa los Git Hooks configurados. |
+| Comando                | Descripción                                                      |
+| ---------------------- | ---------------------------------------------------------------- |
+| `npm run dev`          | Inicia el servidor de desarrollo de Vite.                        |
+| `npm run build`        | Compila la aplicación o librería según la configuración de Vite. |
+| `npm run preview`      | Previsualiza la compilación de producción.                       |
+| `npm run lint`         | Ejecuta ESLint para validar el código.                           |
+| `npm run format`       | Formatea los archivos con Prettier.                              |
+| `npm run format:check` | Comprueba el formato sin modificar archivos.                     |
+| `npm run package:lib`  | Ejecuta el proceso de empaquetado de la librería.                |
+| `npm run prepare`      | Inicializa los Git Hooks configurados.                           |
 
-Los comandos disponibles dependen de los scripts definidos en `package.json`. Ajusta esta tabla según la configuración real del proyecto.
+Los comandos disponibles dependen de los scripts definidos en `package.json`.
+Ajusta esta tabla según la configuración real del proyecto.
 
 ## 🎨 Gestión de temas
 
-La librería permite centralizar la configuración visual mediante proveedores de temas y definiciones reutilizables.
+La librería permite centralizar la configuración visual mediante proveedores de
+temas y definiciones reutilizables.
 
 Sus responsabilidades pueden incluir:
 
@@ -140,7 +149,8 @@ Adapta el import y las propiedades según la API pública real de la librería.
 
 ## 🌍 Internacionalización
 
-La librería puede proporcionar un mecanismo centralizado para gestionar traducciones y múltiples idiomas.
+La librería puede proporcionar un mecanismo centralizado para gestionar
+traducciones y múltiples idiomas.
 
 Sus responsabilidades pueden incluir:
 
@@ -166,13 +176,15 @@ export function App() {
 }
 ```
 
-Consulta la API real del proveedor para conocer los idiomas soportados, los catálogos y las opciones de configuración.
+Consulta la API real del proveedor para conocer los idiomas soportados, los
+catálogos y las opciones de configuración.
 
 ## 🧹 Calidad del código
 
 ### ESLint
 
-ESLint identifica posibles errores y verifica el cumplimiento de las reglas de calidad del código.
+ESLint identifica posibles errores y verifica el cumplimiento de las reglas de
+calidad del código.
 
 ```bash
 npm run lint
@@ -192,11 +204,13 @@ Comprueba el formato sin modificar archivos:
 npm run format:check
 ```
 
-En los flujos de integración continua se recomienda comprobar el formato sin modificar archivos.
+En los flujos de integración continua se recomienda comprobar el formato sin
+modificar archivos.
 
 ### TypeScript
 
-TypeScript ayuda a detectar errores de tipos y mantener una API pública predecible.
+TypeScript ayuda a detectar errores de tipos y mantener una API pública
+predecible.
 
 Si la configuración del proyecto lo permite, ejecuta:
 
@@ -204,11 +218,13 @@ Si la configuración del proyecto lo permite, ejecuta:
 npx tsc --noEmit
 ```
 
-Si existen configuraciones de TypeScript separadas, valida las correspondientes a la aplicación y a las herramientas de Node.js.
+Si existen configuraciones de TypeScript separadas, valida las correspondientes
+a la aplicación y a las herramientas de Node.js.
 
 ## 🪝 Conventional Commits
 
-El proyecto utiliza Conventional Commits para estandarizar los mensajes de commit.
+El proyecto utiliza Conventional Commits para estandarizar los mensajes de
+commit.
 
 ### Formato
 
@@ -230,28 +246,31 @@ ci(actions): agregar flujo de despliegue
 
 ### Tipos de commit
 
-| Tipo | Uso |
-|---|---|
-| `feat` | Nuevas funcionalidades. |
-| `fix` | Correcciones de errores. |
-| `refactor` | Reestructuración del código. |
-| `test` | Pruebas automatizadas. |
-| `docs` | Documentación. |
-| `style` | Cambios de formato o estilo sin alterar la lógica. |
-| `build` | Compilación y dependencias. |
-| `ci` | Configuración de CI/CD. |
-| `chore` | Tareas de mantenimiento. |
+| Tipo       | Uso                                                |
+| ---------- | -------------------------------------------------- |
+| `feat`     | Nuevas funcionalidades.                            |
+| `fix`      | Correcciones de errores.                           |
+| `refactor` | Reestructuración del código.                       |
+| `test`     | Pruebas automatizadas.                             |
+| `docs`     | Documentación.                                     |
+| `style`    | Cambios de formato o estilo sin alterar la lógica. |
+| `build`    | Compilación y dependencias.                        |
+| `ci`       | Configuración de CI/CD.                            |
+| `chore`    | Tareas de mantenimiento.                           |
 
 ### Git Hooks automatizados
 
-Cuando los hooks locales están configurados, antes de crear un commit se ejecutan:
+Cuando los hooks locales están configurados, antes de crear un commit se
+ejecutan:
 
 1. **ESLint:** valida la calidad del código.
 2. **Commitlint:** verifica que el mensaje cumpla con Conventional Commits.
 
 Si falla ESLint o el mensaje no cumple la convención, Git rechaza el commit.
 
-Si los hooks se generan localmente y están excluidos del control de versiones, el repositorio debe incluir el script de configuración y ejecutarlo automáticamente durante la instalación de dependencias.
+Si los hooks se generan localmente y están excluidos del control de versiones,
+el repositorio debe incluir el script de configuración y ejecutarlo
+automáticamente durante la instalación de dependencias.
 
 ## 📦 Empaquetado de la librería
 
@@ -268,13 +287,16 @@ El proceso de empaquetado debe:
 3. Empaquetar los archivos generados.
 4. Guardar el archivo `.tgz` en `resources/`.
 
-Asegúrate de incluir el JavaScript compilado, las declaraciones de TypeScript, los recursos necesarios y los metadatos del paquete.
+Asegúrate de incluir el JavaScript compilado, las declaraciones de TypeScript,
+los recursos necesarios y los metadatos del paquete.
 
-Los campos `main`, `module`, `types` y `exports` de `package.json` deben apuntar a los archivos generados correspondientes, cuando aplique.
+Los campos `main`, `module`, `types` y `exports` de `package.json` deben apuntar
+a los archivos generados correspondientes, cuando aplique.
 
 ## ⚙️ GitHub Actions
 
-GitHub Actions permite automatizar las validaciones y la distribución de la librería.
+GitHub Actions permite automatizar las validaciones y la distribución de la
+librería.
 
 ### Validación de código y formato
 
@@ -288,11 +310,13 @@ Las validaciones pueden incluir:
 
 ### Despliegue del paquete
 
-El workflow de despliegue genera el paquete `.tgz` y lo publica como artefacto descargable de la ejecución correspondiente de GitHub Actions.
+El workflow de despliegue genera el paquete `.tgz` y lo publica como artefacto
+descargable de la ejecución correspondiente de GitHub Actions.
 
 Puedes descargarlo desde la sección **Actions** del repositorio.
 
-> Subir un artefacto a GitHub Actions no equivale a publicar la librería en npm o GitHub Packages.
+> Subir un artefacto a GitHub Actions no equivale a publicar la librería en npm
+> o GitHub Packages.
 
 ## 🔐 Distribución privada
 
@@ -333,7 +357,8 @@ starter-react-ui/
 └── README.md
 ```
 
-La estructura definitiva dependerá de la arquitectura implementada en el repositorio.
+La estructura definitiva dependerá de la arquitectura implementada en el
+repositorio.
 
 ## 🤝 Guía de contribución
 
@@ -343,12 +368,13 @@ La estructura definitiva dependerá de la arquitectura implementada en el reposi
 4. Utiliza mensajes de commit que cumplan con Conventional Commits.
 5. Abre un pull request hacia la rama de desarrollo correspondiente.
 
-
 ## 🔒 Licencia y propiedad intelectual
 
 **Software propietario. Todos los derechos reservados.**
 
-Esta librería es propiedad privada de sus titulares. Su código fuente, componentes, diseños, documentación y demás materiales están protegidos por las leyes aplicables de propiedad intelectual.
+Esta librería es propiedad privada de sus titulares. Su código fuente,
+componentes, diseños, documentación y demás materiales están protegidos por las
+leyes aplicables de propiedad intelectual.
 
 Queda prohibido, sin autorización previa y por escrito del titular:
 
@@ -358,8 +384,10 @@ Queda prohibido, sin autorización previa y por escrito del titular:
 - Compartir credenciales, archivos privados o acceso al repositorio.
 - Utilizar la librería fuera del alcance de la autorización concedida.
 
-El acceso al repositorio o la posibilidad de instalar el paquete no implica la transferencia de propiedad ni la concesión de derechos de redistribución.
+El acceso al repositorio o la posibilidad de instalar el paquete no implica la
+transferencia de propiedad ni la concesión de derechos de redistribución.
 
-Cualquier permiso de uso debe ser autorizado expresamente por el titular y limitarse a las condiciones acordadas.
+Cualquier permiso de uso debe ser autorizado expresamente por el titular y
+limitarse a las condiciones acordadas.
 
 Copyright © 2026. Todos los derechos reservados.
