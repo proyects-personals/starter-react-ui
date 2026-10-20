@@ -31,12 +31,29 @@ function findTheme(
  * @author Steveen Cues
  * @version 1.0.0
  */
+/**
+ * @description Obtiene el primer tema registrado.
+ * @author Steveen Cues
+ * @version 2.1.0
+ */
+/**
+ * @description Obtiene el primer tema registrado.
+ * @author Steveen Cues
+ * @version 2.1.0
+ */
+/**
+ * @description Obtiene el primer tema registrado.
+ * @author Steveen Cues
+ * @version 2.2.0
+ */
 function getFirstTheme(themes: readonly AppTheme[]): AppTheme {
-  if (themes.length === 0) {
+  const firstTheme = themes.at(0);
+
+  if (firstTheme === undefined) {
     throw new Error("ThemeProvider requires at least one registered theme.");
   }
 
-  return themes[0];
+  return firstTheme;
 }
 
 /**
@@ -85,9 +102,9 @@ export function assertThemeExists(
 /**
  * @description Crea variables CSS para los colores de superficie.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
-function createSurfaceVariables(colors: AppTheme["colors"]): SurfaceVariables {
+function createSurfaceVariables(colors: AppTheme["themes"]): SurfaceVariables {
   return {
     [ThemeCssVariable.SURFACE_BACKGROUND]: colors.surface.background,
     [ThemeCssVariable.SURFACE_SURFACE]: colors.surface.surface,
@@ -101,9 +118,9 @@ function createSurfaceVariables(colors: AppTheme["colors"]): SurfaceVariables {
 /**
  * @description Crea variables CSS para los colores de texto.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
-function createTextVariables(colors: AppTheme["colors"]): TextVariables {
+function createTextVariables(colors: AppTheme["themes"]): TextVariables {
   return {
     [ThemeCssVariable.TEXT_PRIMARY]: colors.text.primary,
     [ThemeCssVariable.TEXT_SECONDARY]: colors.text.secondary,
@@ -118,9 +135,9 @@ function createTextVariables(colors: AppTheme["colors"]): TextVariables {
 /**
  * @description Crea variables CSS para los colores de marca.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
-function createBrandVariables(colors: AppTheme["colors"]): BrandVariables {
+function createBrandVariables(colors: AppTheme["themes"]): BrandVariables {
   return {
     [ThemeCssVariable.BRAND_PRIMARY]: colors.brand.primary,
     [ThemeCssVariable.BRAND_PRIMARY_HOVER]: colors.brand.primaryHover,
@@ -139,9 +156,9 @@ function createBrandVariables(colors: AppTheme["colors"]): BrandVariables {
 /**
  * @description Crea variables CSS para los estados.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
-function createStateVariables(colors: AppTheme["colors"]): StateVariables {
+function createStateVariables(colors: AppTheme["themes"]): StateVariables {
   return {
     [ThemeCssVariable.STATE_SUCCESS]: colors.state.success,
     [ThemeCssVariable.STATE_SUCCESS_BACKGROUND]: colors.state.successBackground,
@@ -157,9 +174,9 @@ function createStateVariables(colors: AppTheme["colors"]): StateVariables {
 /**
  * @description Crea variables CSS para los bordes.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
-function createBorderVariables(colors: AppTheme["colors"]): BorderVariables {
+function createBorderVariables(colors: AppTheme["themes"]): BorderVariables {
   return {
     [ThemeCssVariable.BORDER_DEFAULT]: colors.border.default,
     [ThemeCssVariable.BORDER_SUBTLE]: colors.border.subtle,
@@ -174,25 +191,25 @@ function createBorderVariables(colors: AppTheme["colors"]): BorderVariables {
 /**
  * @description Crea variables CSS para las sombras.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
-function createShadowVariables(colors: AppTheme["colors"]): ShadowVariables {
+function createShadowVariables(colors: AppTheme["themes"]): ShadowVariables {
   return {
-    [ThemeCssVariable.SHADOW_COLOR]: colors.shadow.color,
-    [ThemeCssVariable.SHADOW_SUBTLE]: colors.shadow.subtle,
-    [ThemeCssVariable.SHADOW_SMALL]: colors.shadow.small,
-    [ThemeCssVariable.SHADOW_MEDIUM]: colors.shadow.medium,
-    [ThemeCssVariable.SHADOW_LARGE]: colors.shadow.large,
-    [ThemeCssVariable.SHADOW_GLOW]: colors.shadow.glow,
+    [ThemeCssVariable.SHADOW_COLOR]: colors.shadowColors.color,
+    [ThemeCssVariable.SHADOW_SUBTLE]: colors.shadowColors.subtle,
+    [ThemeCssVariable.SHADOW_SMALL]: colors.shadowColors.small,
+    [ThemeCssVariable.SHADOW_MEDIUM]: colors.shadowColors.medium,
+    [ThemeCssVariable.SHADOW_LARGE]: colors.shadowColors.large,
+    [ThemeCssVariable.SHADOW_GLOW]: colors.shadowColors.glow,
   };
 }
 
 /**
  * @description Crea variables CSS para los efectos visuales.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
-function createEffectVariables(colors: AppTheme["colors"]): EffectVariables {
+function createEffectVariables(colors: AppTheme["themes"]): EffectVariables {
   return {
     [ThemeCssVariable.EFFECTS_OVERLAY]: colors.effects.overlay,
     [ThemeCssVariable.EFFECTS_BACKDROP]: colors.effects.backdrop,
@@ -206,41 +223,44 @@ function createEffectVariables(colors: AppTheme["colors"]): EffectVariables {
 /**
  * @description Crea variables CSS para la tipografia.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
 function createTypographyVariables(
-  colors: AppTheme["colors"],
+  colors: AppTheme["themes"],
 ): TypographyVariables {
   return {
     [ThemeCssVariable.TYPOGRAPHY_HEADING_PRIMARY]:
-      colors.typography.heading.primary,
+      colors.typography.heading.h1.color,
     [ThemeCssVariable.TYPOGRAPHY_HEADING_SECONDARY]:
-      colors.typography.heading.secondary,
+      colors.typography.heading.h2.color,
     [ThemeCssVariable.TYPOGRAPHY_HEADING_MUTED]:
-      colors.typography.heading.muted,
-    [ThemeCssVariable.TYPOGRAPHY_BODY_PRIMARY]: colors.typography.body.primary,
+      colors.typography.body.muted.color,
+    [ThemeCssVariable.TYPOGRAPHY_BODY_PRIMARY]:
+      colors.typography.body.primary.color,
     [ThemeCssVariable.TYPOGRAPHY_BODY_SECONDARY]:
-      colors.typography.body.secondary,
-    [ThemeCssVariable.TYPOGRAPHY_BODY_MUTED]: colors.typography.body.muted,
+      colors.typography.body.secondary.color,
+    [ThemeCssVariable.TYPOGRAPHY_BODY_MUTED]:
+      colors.typography.body.muted.color,
     [ThemeCssVariable.TYPOGRAPHY_LABEL_PRIMARY]:
-      colors.typography.label.primary,
+      colors.typography.label.primary.color,
     [ThemeCssVariable.TYPOGRAPHY_LABEL_SECONDARY]:
-      colors.typography.label.secondary,
-    [ThemeCssVariable.TYPOGRAPHY_LABEL_MUTED]: colors.typography.label.muted,
+      colors.typography.label.secondary.color,
+    [ThemeCssVariable.TYPOGRAPHY_LABEL_MUTED]:
+      colors.typography.label.muted.color,
     [ThemeCssVariable.TYPOGRAPHY_BUTTON_PRIMARY]:
-      colors.typography.button.primary,
+      colors.typography.button.primary.color,
     [ThemeCssVariable.TYPOGRAPHY_BUTTON_SECONDARY]:
-      colors.typography.button.secondary,
+      colors.typography.button.secondary.color,
   };
 }
 
 /**
  * @description Genera todas las variables CSS a partir de los tokens del tema.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 2.0.0
  */
 export function createThemeVariables(theme: AppTheme): ThemeCssVariables {
-  const { colors } = theme;
+  const { themes: colors } = theme;
 
   return {
     ...createSurfaceVariables(colors),
