@@ -1,2 +1,1 @@
-export * from "./Button";
-export * from './molecules';
+export * from "./molecules";

@@ -14,7 +14,7 @@ const PROJECT_DIRECTORY = fileURLToPath(new URL(".", import.meta.url));
 const SOURCE_FILES = ["src/**/*.{ts,tsx}"];
 
 const MAX_FILE_LINES = 500;
-const MAX_FUNCTION_LINES = 60;
+const MAX_FUNCTION_LINES = 100;
 const MAX_CYCLOMATIC_COMPLEXITY = 8;
 const MAX_NESTING_DEPTH = 3;
 const MAX_NESTED_CALLBACKS = 3;

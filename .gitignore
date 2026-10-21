@@ -25,3 +25,5 @@ dist-ssr
 resources
 package-lock.json
 .package-temp
+tsconfig.tsbuildinfo
+tsconfig.app.tsbuildinfo

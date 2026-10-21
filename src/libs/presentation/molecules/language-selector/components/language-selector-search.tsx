@@ -1,8 +1,11 @@
-import { LANGUAGE_SEARCH_PLACEHOLDER, LanguageSelectorSearchProps } from "@presentation";
+import {
+  LANGUAGE_SEARCH_PLACEHOLDER,
+  type LanguageSelectorSearchProps,
+} from "@presentation";
 import type { ChangeEvent, FC, JSX } from "react";
 
 /**
- * @description Renderiza el campo de búsqueda de idiomas.
+ * @description Renderiza el campo de busqueda de idiomas.
  * @author Steveen Cues
  * @version 1.0.0
  */
@@ -29,11 +32,7 @@ export const LanguageSelectorSearch: FC<LanguageSelectorSearchProps> = ({
         strokeWidth={2}
       >
         <circle cx="11" cy="11" r="7" />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m16 16 4 4"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m16 16 4 4" />
       </svg>
 
       <input

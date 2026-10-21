@@ -1,4 +1,7 @@
-import { getLanguageName, LanguageSelectorTriggerProps } from "@presentation";
+import {
+  getLanguageName,
+  type LanguageSelectorTriggerProps,
+} from "@presentation";
 import type { FC, JSX } from "react";
 
 /**
@@ -50,11 +53,7 @@ export const LanguageSelectorTrigger: FC<LanguageSelectorTriggerProps> = ({
         stroke="currentColor"
         strokeWidth={2}
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m6 9 6 6 6-6"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
       </svg>
     </button>
   );

@@ -1,16 +1,22 @@
-import { ThemeSelectorTriggerProps } from "@presentation";
 import type { FC, JSX } from "react";
+
+import { useLanguage } from "@aplicacion";
+import { type ThemeSelectorTriggerProps } from "@presentation";
 
 /**
  * @description Muestra el tema activo y controla la apertura del selector.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.3.0
  */
 export const ThemeSelectorTrigger: FC<ThemeSelectorTriggerProps> = ({
   theme,
   isOpen,
+  selectedLabel,
   onToggle,
 }): JSX.Element => {
+  const { t } = useLanguage();
+  const themeName = t(theme.manifest.name);
+
   return (
     <button
       type="button"
@@ -24,16 +30,17 @@ export const ThemeSelectorTrigger: FC<ThemeSelectorTriggerProps> = ({
         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-content shadow-sm"
       >
         <span className="text-lg font-bold">
-          {theme.manifest.name.charAt(0).toUpperCase()}
+          {themeName.charAt(0).toUpperCase()}
         </span>
       </span>
 
       <span className="min-w-0 flex-1">
         <span className="block truncate font-semibold text-base-content">
-          {theme.manifest.name}
+          {themeName}
         </span>
+
         <span className="block text-xs text-base-content/60">
-          Tema seleccionado
+          {selectedLabel}
         </span>
       </span>
 
@@ -53,4 +60,4 @@ export const ThemeSelectorTrigger: FC<ThemeSelectorTriggerProps> = ({
   );
 };
 
-export default ThemeSelectorTrigger
+export default ThemeSelectorTrigger;

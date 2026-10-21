@@ -1,25 +1,30 @@
 import type { AppTheme } from "@domain";
 
 /**
- * @description Filtra los temas por nombre, nombre visible y descripción.
+ * @description Filtra los temas por nombre o descripcion traducidos.
  * @author Steveen Cues
- * @version 1.0.0
- * @example
- * const filteredThemes = filterThemes(themes, "dark");
+ * @version 1.2.0
  */
 export const filterThemes = (
   themes: readonly AppTheme[],
   search: string,
+  translate: (key: string) => string,
 ): readonly AppTheme[] => {
   const normalizedSearch = search.trim().toLocaleLowerCase();
 
-  return themes.filter((availableTheme: AppTheme) =>
-    [
-      availableTheme.name,
-      availableTheme.manifest.name,
+  if (normalizedSearch.length === 0) {
+    return themes;
+  }
+
+  return themes.filter((availableTheme) => {
+    const name = translate(availableTheme.manifest.name).toLocaleLowerCase();
+
+    const description = translate(
       availableTheme.manifest.description,
-    ].some((value: string) =>
-      value.toLocaleLowerCase().includes(normalizedSearch),
-    ),
-  );
+    ).toLocaleLowerCase();
+
+    return (
+      name.includes(normalizedSearch) || description.includes(normalizedSearch)
+    );
+  });
 };
