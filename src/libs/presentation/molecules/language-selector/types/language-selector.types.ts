@@ -40,7 +40,7 @@ export interface LanguageSelectorListProps {
 }
 
 /**
- * @description Define las propiedades de una opción de idioma.
+ * @description Define las propiedades de una opcion de idioma.
  * @author Steveen Cues
  * @version 1.0.0
  */
@@ -48,4 +48,21 @@ export interface LanguageSelectorItemProps {
   readonly language: string;
   readonly isSelected: boolean;
   readonly onSelect: (language: string) => void;
+}
+
+/**
+ * @description Define el estado y las acciones del selector de idiomas.
+ * @author Steveen Cues
+ * @version 1.0.0
+ */
+export interface UseLanguageSelectorResult {
+  readonly language: string;
+  readonly languages: readonly string[];
+  readonly hasSearch: boolean;
+  readonly isOpen: boolean;
+  readonly searchQuery: string;
+  readonly setSearchQuery: (value: string) => void;
+  readonly toggleSelector: () => void;
+  readonly closeSelector: () => void;
+  readonly selectLanguage: (selectedLanguage: string) => void;
 }

@@ -1,4 +1,4 @@
-import { ThemeSelectorSearchProps } from "@presentation";
+import { type ThemeSelectorSearchProps } from "@presentation";
 import type { FC, JSX } from "react";
 
 /**

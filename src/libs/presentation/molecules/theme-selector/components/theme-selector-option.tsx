@@ -1,10 +1,12 @@
-import { ThemeSelectorOptionProps } from "@presentation";
 import type { FC, JSX } from "react";
+
+import { useLanguage } from "@aplicacion";
+import { type ThemeSelectorOptionProps } from "@presentation";
 
 /**
  * @description Representa una opcion individual del selector de temas.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const ThemeSelectorOption: FC<ThemeSelectorOptionProps> = ({
   theme,
@@ -12,6 +14,11 @@ export const ThemeSelectorOption: FC<ThemeSelectorOptionProps> = ({
   showDescription,
   onSelect,
 }): JSX.Element => {
+  const { t } = useLanguage();
+
+  const themeName = t(theme.manifest.name);
+  const themeDescription = t(theme.manifest.description);
+
   return (
     <li>
       <button
@@ -36,12 +43,12 @@ export const ThemeSelectorOption: FC<ThemeSelectorOptionProps> = ({
 
         <span className="min-w-0 flex-1">
           <span className="block truncate text-sm font-semibold">
-            {theme.manifest.name}
+            {themeName}
           </span>
 
           {showDescription && (
             <span className="mt-0.5 block truncate text-xs text-base-content/60">
-              {theme.manifest.description}
+              {themeDescription}
             </span>
           )}
         </span>

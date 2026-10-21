@@ -1,7 +1,7 @@
 {
   "name": "@steveencues/starter-react-ui",
-  "version": "1.0.7",
-  "private": false,
+  "version": "1.0.0",
+  "private": true,
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
