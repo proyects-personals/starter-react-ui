@@ -1,76 +1,61 @@
+import type { ThemeColorToken } from "@domain";
+
 /**
- * @description Define los nombres de las variables CSS de la libreria.
+ * @description Define los nombres de las variables CSS de DaisyUI.
  * @author Steveen Cues
  * @version 1.0.0
  */
-export const ThemeCssVariable = {
-  SURFACE_BACKGROUND: "--rui-surface-background",
-  SURFACE_SURFACE: "--rui-surface-surface",
-  SURFACE_SURFACE_ELEVATED: "--rui-surface-surface-elevated",
-  SURFACE_SURFACE_HOVER: "--rui-surface-surface-hover",
-  SURFACE_SURFACE_ACTIVE: "--rui-surface-surface-active",
-  SURFACE_SURFACE_DISABLED: "--rui-surface-surface-disabled",
-
-  TEXT_PRIMARY: "--rui-text-primary",
-  TEXT_SECONDARY: "--rui-text-secondary",
-  TEXT_MUTED: "--rui-text-muted",
-  TEXT_DISABLED: "--rui-text-disabled",
-  TEXT_INVERSE: "--rui-text-inverse",
-  TEXT_LINK: "--rui-text-link",
-  TEXT_LINK_HOVER: "--rui-text-link-hover",
-
-  BRAND_PRIMARY: "--rui-brand-primary",
-  BRAND_PRIMARY_HOVER: "--rui-brand-primary-hover",
-  BRAND_PRIMARY_ACTIVE: "--rui-brand-primary-active",
-  BRAND_PRIMARY_CONTRAST: "--rui-brand-primary-contrast",
-  BRAND_SECONDARY: "--rui-brand-secondary",
-  BRAND_SECONDARY_HOVER: "--rui-brand-secondary-hover",
-  BRAND_SECONDARY_ACTIVE: "--rui-brand-secondary-active",
-  BRAND_SECONDARY_CONTRAST: "--rui-brand-secondary-contrast",
-  BRAND_ACCENT: "--rui-brand-accent",
-  BRAND_ACCENT_HOVER: "--rui-brand-accent-hover",
-  BRAND_ACCENT_CONTRAST: "--rui-brand-accent-contrast",
-
-  STATE_SUCCESS: "--rui-state-success",
-  STATE_SUCCESS_BACKGROUND: "--rui-state-success-background",
-  STATE_WARNING: "--rui-state-warning",
-  STATE_WARNING_BACKGROUND: "--rui-state-warning-background",
-  STATE_ERROR: "--rui-state-error",
-  STATE_ERROR_BACKGROUND: "--rui-state-error-background",
-  STATE_INFO: "--rui-state-info",
-  STATE_INFO_BACKGROUND: "--rui-state-info-background",
-
-  BORDER_DEFAULT: "--rui-border-default",
-  BORDER_SUBTLE: "--rui-border-subtle",
-  BORDER_STRONG: "--rui-border-strong",
-  BORDER_FOCUS: "--rui-border-focus",
-  BORDER_HOVER: "--rui-border-hover",
-  BORDER_ACTIVE: "--rui-border-active",
-  BORDER_DISABLED: "--rui-border-disabled",
-
-  SHADOW_COLOR: "--rui-shadow-color",
-  SHADOW_SUBTLE: "--rui-shadow-subtle",
-  SHADOW_SMALL: "--rui-shadow-small",
-  SHADOW_MEDIUM: "--rui-shadow-medium",
-  SHADOW_LARGE: "--rui-shadow-large",
-  SHADOW_GLOW: "--rui-shadow-glow",
-
-  EFFECTS_OVERLAY: "--rui-effects-overlay",
-  EFFECTS_BACKDROP: "--rui-effects-backdrop",
-  EFFECTS_BLUR: "--rui-effects-blur",
-  EFFECTS_BLUR_STRONG: "--rui-effects-blur-strong",
-  EFFECTS_GLASS_BACKGROUND: "--rui-effects-glass-background",
-  EFFECTS_GLASS_BORDER: "--rui-effects-glass-border",
-
-  TYPOGRAPHY_HEADING_PRIMARY: "--rui-typography-heading-primary",
-  TYPOGRAPHY_HEADING_SECONDARY: "--rui-typography-heading-secondary",
-  TYPOGRAPHY_HEADING_MUTED: "--rui-typography-heading-muted",
-  TYPOGRAPHY_BODY_PRIMARY: "--rui-typography-body-primary",
-  TYPOGRAPHY_BODY_SECONDARY: "--rui-typography-body-secondary",
-  TYPOGRAPHY_BODY_MUTED: "--rui-typography-body-muted",
-  TYPOGRAPHY_LABEL_PRIMARY: "--rui-typography-label-primary",
-  TYPOGRAPHY_LABEL_SECONDARY: "--rui-typography-label-secondary",
-  TYPOGRAPHY_LABEL_MUTED: "--rui-typography-label-muted",
-  TYPOGRAPHY_BUTTON_PRIMARY: "--rui-typography-button-primary",
-  TYPOGRAPHY_BUTTON_SECONDARY: "--rui-typography-button-secondary",
+export const CSS_THEME_TOKENS = {
+  primary: "--color-primary",
+  primaryContent: "--color-primary-content",
+  secondary: "--color-secondary",
+  secondaryContent: "--color-secondary-content",
+  accent: "--color-accent",
+  accentContent: "--color-accent-content",
+  neutral: "--color-neutral",
+  neutralContent: "--color-neutral-content",
+  base100: "--color-base-100",
+  base200: "--color-base-200",
+  base300: "--color-base-300",
+  baseContent: "--color-base-content",
+  info: "--color-info",
+  infoContent: "--color-info-content",
+  success: "--color-success",
+  successContent: "--color-success-content",
+  warning: "--color-warning",
+  warningContent: "--color-warning-content",
+  error: "--color-error",
+  errorContent: "--color-error-content",
 } as const;
+
+/**
+ * @description Define la coleccion de claves y variables CSS de DaisyUI.
+ * Cada entrada relaciona una clave de color con su variable CSS.
+ * @author Steveen Cues
+ * @version 1.0.0
+ */
+export const CSS_THEME_TOKEN_ENTRIES: readonly [
+  ThemeColorToken,
+  (typeof CSS_THEME_TOKENS)[ThemeColorToken],
+][] = [
+  ["primary", CSS_THEME_TOKENS.primary],
+  ["primaryContent", CSS_THEME_TOKENS.primaryContent],
+  ["secondary", CSS_THEME_TOKENS.secondary],
+  ["secondaryContent", CSS_THEME_TOKENS.secondaryContent],
+  ["accent", CSS_THEME_TOKENS.accent],
+  ["accentContent", CSS_THEME_TOKENS.accentContent],
+  ["neutral", CSS_THEME_TOKENS.neutral],
+  ["neutralContent", CSS_THEME_TOKENS.neutralContent],
+  ["base100", CSS_THEME_TOKENS.base100],
+  ["base200", CSS_THEME_TOKENS.base200],
+  ["base300", CSS_THEME_TOKENS.base300],
+  ["baseContent", CSS_THEME_TOKENS.baseContent],
+  ["info", CSS_THEME_TOKENS.info],
+  ["infoContent", CSS_THEME_TOKENS.infoContent],
+  ["success", CSS_THEME_TOKENS.success],
+  ["successContent", CSS_THEME_TOKENS.successContent],
+  ["warning", CSS_THEME_TOKENS.warning],
+  ["warningContent", CSS_THEME_TOKENS.warningContent],
+  ["error", CSS_THEME_TOKENS.error],
+  ["errorContent", CSS_THEME_TOKENS.errorContent],
+];
