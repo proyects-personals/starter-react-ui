@@ -4,56 +4,56 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import dts from "unplugin-dts/vite";
 
-const SRC_DIRECTORY = fileURLToPath(new URL("./src", import.meta.url));
-const LIBS_DIRECTORY = fileURLToPath(new URL("./src/libs", import.meta.url));
-const LIBRARY_ENTRY = fileURLToPath(new URL("./src/index.ts", import.meta.url));
+const SRC_DIRECTORY = fileURLToPath(new URL("./src/", import.meta.url));
+const LIBS_DIRECTORY = fileURLToPath(new URL("./src/libs/", import.meta.url));
+const OUTPUT_DIRECTORY = fileURLToPath(new URL("./dist/", import.meta.url));
 const TYPESCRIPT_CONFIG = fileURLToPath(
   new URL("./tsconfig.types.json", import.meta.url),
 );
 
-const OUTPUT_DIRECTORY = fileURLToPath(new URL("./dist", import.meta.url));
-
 const ALIASES = [
   {
-    find: "@aplicacion",
-    replacement: `${LIBS_DIRECTORY}/aplicacion`,
+    find: /^@presentation$/,
+    replacement: `${LIBS_DIRECTORY}presentation/index.ts`,
   },
   {
-    find: "@domain",
-    replacement: `${LIBS_DIRECTORY}/domain`,
+    find: /^@presentation\//,
+    replacement: `${LIBS_DIRECTORY}presentation/`,
   },
   {
-    find: "@infraestructura",
-    replacement: `${LIBS_DIRECTORY}/infraestructura`,
+    find: /^@aplicacion$/,
+    replacement: `${LIBS_DIRECTORY}aplicacion/index.ts`,
   },
   {
-    find: "@components",
-    replacement: `${LIBS_DIRECTORY}/components`,
+    find: /^@aplicacion\//,
+    replacement: `${LIBS_DIRECTORY}aplicacion/`,
   },
   {
-    find: "@assets",
-    replacement: `${SRC_DIRECTORY}/assets`,
+    find: /^@domain$/,
+    replacement: `${LIBS_DIRECTORY}domain/index.ts`,
   },
   {
-    find: "@styles",
-    replacement: `${LIBS_DIRECTORY}/components/styles`,
+    find: /^@domain\//,
+    replacement: `${LIBS_DIRECTORY}domain/`,
   },
   {
-    find: "@/",
-    replacement: `${SRC_DIRECTORY}/`,
+    find: /^@infraestructura$/,
+    replacement: `${LIBS_DIRECTORY}infraestructura/index.ts`,
   },
   {
-    find: /^@$/,
-    replacement: LIBRARY_ENTRY,
+    find: /^@infraestructura\//,
+    replacement: `${LIBS_DIRECTORY}infraestructura/`,
+  },
+  {
+    find: /^@assets\//,
+    replacement: `${SRC_DIRECTORY}assets/`,
+  },
+  {
+    find: /^@\//,
+    replacement: SRC_DIRECTORY,
   },
 ];
 
-/**
- * @description Configura Vite para compilar la librería de componentes React.
- * Genera módulos ESM, CommonJS y declaraciones de TypeScript.
- * @author Steveen Cues
- * @version 1.1.0
- */
 export default defineConfig({
   plugins: [
     react(),
@@ -66,26 +66,21 @@ export default defineConfig({
       copyDtsFiles: true,
     }),
   ],
-
   resolve: {
     alias: ALIASES,
   },
-
   build: {
     lib: {
-      entry: LIBRARY_ENTRY,
+      entry: fileURLToPath(new URL("./src/index.ts", import.meta.url)),
       name: "ReactUI",
       formats: ["es", "cjs"],
-      fileName: (format) => {
-        return format === "es" ? "index.js" : "index.cjs";
-      },
+      fileName: (format): string =>
+        format === "es" ? "index.js" : "index.cjs",
       cssFileName: "style",
     },
-
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime"],
     },
-
     sourcemap: true,
     emptyOutDir: true,
   },
