@@ -1,11 +1,18 @@
-import { useEffect, useRef, type FC, type JSX } from "react";
-import { LANGUAGE_SELECTOR_LABEL, LanguageSelectorList, LanguageSelectorProps, LanguageSelectorSearch, LanguageSelectorTrigger, useLanguageSelector } from "@presentation";
-
+import { useRef, type FC, type JSX } from "react";
+import {
+  LANGUAGE_SELECTOR_LABEL,
+  LanguageSelectorList,
+  type LanguageSelectorProps,
+  LanguageSelectorSearch,
+  LanguageSelectorTrigger,
+  useLanguageSelector,
+  useLanguageSelectorEvents,
+} from "@presentation";
 
 /**
  * @description Permite buscar y seleccionar idiomas disponibles.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const LanguageSelector: FC<LanguageSelectorProps> = ({
   className = "",
@@ -24,40 +31,7 @@ export const LanguageSelector: FC<LanguageSelectorProps> = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect((): (() => void) => {
-    /**
-     * @description Cierra el selector al hacer clic fuera.
-     * @param event - Evento del documento.
-     */
-    function handleOutsideClick(event: MouseEvent): void {
-      const target = event.target;
-
-      if (
-        target instanceof Node &&
-        !containerRef.current?.contains(target)
-      ) {
-        closeSelector();
-      }
-    }
-
-    /**
-     * @description Cierra el selector con Escape.
-     * @param event - Evento de teclado.
-     */
-    function handleEscape(event: KeyboardEvent): void {
-      if (event.key === "Escape") {
-        closeSelector();
-      }
-    }
-
-    document.addEventListener("mousedown", handleOutsideClick);
-    document.addEventListener("keydown", handleEscape);
-
-    return (): void => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [closeSelector]);
+  useLanguageSelectorEvents(containerRef, closeSelector);
 
   return (
     <div

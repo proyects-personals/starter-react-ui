@@ -1,1 +1,1 @@
-export * from './language-selector.types';
+export * from "./language-selector.types";

@@ -1,4 +1,8 @@
-import { LANGUAGE_EMPTY_MESSAGE, LanguageSelectorItem, LanguageSelectorListProps } from "@presentation";
+import {
+  LANGUAGE_EMPTY_MESSAGE,
+  LanguageSelectorItem,
+  type LanguageSelectorListProps,
+} from "@presentation";
 import type { FC, JSX } from "react";
 
 /**

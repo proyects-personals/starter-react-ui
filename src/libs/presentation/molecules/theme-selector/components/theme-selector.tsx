@@ -1,59 +1,73 @@
-import { useState, type FC, type JSX } from "react";
-import { useTheme } from "@aplicacion";
-import { filterThemes, SEARCH_THRESHOLD, ThemeSelectorPanel, ThemeSelectorProps, ThemeSelectorTrigger } from "@presentation";
-
+import type { FC, JSX } from "react";
+import { useLanguage, useTheme } from "@aplicacion";
+import {
+  filterThemes,
+  prioritizeSelectedTheme,
+  SEARCH_THRESHOLD,
+  ThemeSelectorPanel,
+  type ThemeSelectorProps,
+  ThemeSelectorTrigger,
+  translateThemeSelectorMessages,
+  useThemeSelectorInteraction,
+} from "@presentation";
 
 /**
  * @description Permite buscar, visualizar y seleccionar temas disponibles.
+ * Prioriza el tema seleccionado sin perder los demas temas filtrados.
  * @author Steveen Cues
- * @version 2.2.0
+ * @version 3.5.0
  */
 export const ThemeSelector: FC<ThemeSelectorProps> = ({
-  label = "Tema visual",
-  placeholder = "Buscar tema...",
+  label = "theme.title",
+  placeholder = "theme.searchPlaceholder",
   className = "",
   showDescriptions = true,
+  translations,
 }): JSX.Element => {
   const { theme, themes, setTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>("");
+  const { t } = useLanguage();
 
-  const filteredThemes = filterThemes(themes, search);
+  const {
+    isOpen,
+    search,
+    containerRef,
+    handleToggle,
+    handleSearchChange,
+    handleSelectTheme,
+  } = useThemeSelectorInteraction({
+    onSelectTheme: setTheme,
+  });
 
-  const handleToggle = (): void => {
-    setIsOpen((previousValue) => !previousValue);
-    setSearch("");
-  };
+  const messages = translateThemeSelectorMessages(
+    translations,
+    label,
+    placeholder,
+    t,
+  );
 
-  const handleSelectTheme = (themeName: string): void => {
-    setTheme(themeName);
-    setIsOpen(false);
-    setSearch("");
-  };
+  const filteredThemes = filterThemes(themes, search, t);
+  const visibleThemes = prioritizeSelectedTheme(filteredThemes, theme);
 
   return (
-    <div className={`relative w-full max-w-sm ${className}`}>
-      <label className="mb-2 block text-sm font-semibold text-base-content">
-        {label}
-      </label>
-
+    <div ref={containerRef} className={`relative min-w-0 ${className}`}>
       <ThemeSelectorTrigger
         theme={theme}
         isOpen={isOpen}
+        selectedLabel={messages.selected}
         onToggle={handleToggle}
       />
 
       {isOpen && (
         <ThemeSelectorPanel
-          themes={filteredThemes}
+          themes={visibleThemes}
           totalThemes={themes.length}
           selectedTheme={theme.name}
           search={search}
           showSearch={themes.length > SEARCH_THRESHOLD}
-          placeholder={placeholder}
-          label={label}
+          label={messages.title}
           showDescriptions={showDescriptions}
-          onSearchChange={setSearch}
+          translations={messages}
+          onSearchChange={handleSearchChange}
           onSelectTheme={handleSelectTheme}
         />
       )}

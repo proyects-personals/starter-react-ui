@@ -1,13 +1,17 @@
 import { useMemo, useState } from "react";
 import { useLanguage } from "@aplicacion";
-import { filterLanguages, LANGUAGE_SEARCH_THRESHOLD } from "@presentation";
+import {
+  filterLanguages,
+  LANGUAGE_SEARCH_THRESHOLD,
+  type UseLanguageSelectorResult,
+} from "@presentation";
 
 /**
  * @description Administra el estado del selector de idiomas.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
-export function useLanguageSelector() {
+export function useLanguageSelector(): UseLanguageSelectorResult {
   const { language, languages, setLanguage } = useLanguage();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -16,7 +20,7 @@ export function useLanguageSelector() {
   const hasSearch: boolean = languages.length > LANGUAGE_SEARCH_THRESHOLD;
 
   const filteredLanguages = useMemo(
-    () => filterLanguages(languages, searchQuery),
+    (): readonly string[] => filterLanguages(languages, searchQuery),
     [languages, searchQuery],
   );
 
@@ -28,7 +32,7 @@ export function useLanguageSelector() {
   }
 
   /**
-   * @description Cierra el selector y limpia la búsqueda.
+   * @description Cierra el selector y limpia la busqueda.
    */
   function closeSelector(): void {
     setIsOpen(false);
@@ -36,8 +40,7 @@ export function useLanguageSelector() {
   }
 
   /**
-   * @description Selecciona un idioma y cierra el selector.
-   * @param selectedLanguage - Código del idioma seleccionado.
+   * @description Selecciona un idioma y cierra el selector.   * @param selectedLanguage - Codigo del idioma seleccionado.
    */
   function selectLanguage(selectedLanguage: string): void {
     if (selectedLanguage === language) {

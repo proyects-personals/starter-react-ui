@@ -1,5 +1,5 @@
 /**
- * @description Filtra idiomas mediante su código o nombre legible.
+ * @description Filtra idiomas mediante su codigo o nombre legible.
  * @author Steveen Cues
  * @version 1.0.0
  */
@@ -10,7 +10,7 @@ const LANGUAGE_NAMES = new Intl.DisplayNames(["es"], {
 
 /**
  * @description Obtiene el nombre legible de un idioma.
- * @param language - Código del idioma.
+ * @param language - Codigo del idioma.
  * @returns Nombre legible del idioma.
  */
 export function getLanguageName(language: string): string {
@@ -22,9 +22,9 @@ export function getLanguageName(language: string): string {
 }
 
 /**
- * @description Filtra idiomas por código o nombre.
+ * @description Filtra idiomas por codigo o nombre.
  * @param languages - Idiomas disponibles.
- * @param query - Texto de búsqueda.
+ * @param query - Texto de busqueda.
  * @returns Lista de idiomas coincidentes.
  */
 export function filterLanguages(
