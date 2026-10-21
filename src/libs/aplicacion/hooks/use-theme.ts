@@ -1,19 +1,20 @@
 import { ThemeContext } from "@aplicacion";
-import type { IThemeContextValue } from "@domain";
 import { useContext } from "react";
+import type { ThemeContextValue } from "@domain";
 
 /**
- * @description Obtiene el tema activo, los temas disponibles y
- * la funcion para cambiar de tema.
+ * @description Permite consultar y modificar el tema activo.
+ * @returns El contexto con el estado y las acciones del tema.
+ * @throws Error si se utiliza fuera de ThemeProvider.
  * @author Steveen Cues
  * @version 1.0.0
  */
-export function useTheme(): IThemeContextValue {
+export const useTheme = (): ThemeContextValue => {
   const context = useContext(ThemeContext);
 
-  if (context === null) {
+  if (!context) {
     throw new Error("useTheme must be used inside ThemeProvider.");
   }
 
   return context;
-}
+};

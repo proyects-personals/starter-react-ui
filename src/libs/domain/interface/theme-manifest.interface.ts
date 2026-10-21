@@ -1,4 +1,4 @@
-import type { ThemeCategory, ThemeColorScheme, ThemeName } from "@domain";
+import type { ThemeName } from "@domain";
 
 /**
  * @description Define las propiedades basicas de un manifiesto de tema.
@@ -11,8 +11,6 @@ export interface ThemeManifest {
   readonly description: string;
   readonly version: string;
   readonly author: string;
-  readonly category: ThemeCategory;
-  readonly colorScheme: ThemeColorScheme;
   readonly tags: readonly string[];
   readonly preview?: string;
   readonly homepage?: string;

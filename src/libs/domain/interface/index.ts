@@ -1,4 +1,3 @@
 export * from "./translation.interface";
-export * from "./manifest";
-export * from "./theme";
-export * from "./manifest";
+export * from "./theme-manifest.interface";
+export * from "./theme.interface";
