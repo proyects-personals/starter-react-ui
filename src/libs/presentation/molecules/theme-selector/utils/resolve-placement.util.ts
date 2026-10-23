@@ -32,7 +32,7 @@ const PANEL_GAP = 8;
  * @author Steveen Cues
  * @version 1.0.0
  */
-export const MAX_PANEL_HEIGHT = 448;
+const MAX_PANEL_HEIGHT = 448;
 
 /**
  * @description Calcula la colocacion del panel segun el espacio disponible.

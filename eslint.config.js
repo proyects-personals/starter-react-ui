@@ -278,4 +278,60 @@ export default defineConfig([
       "unicorn/no-useless-undefined": "error",
     },
   },
+
+  {
+    files: ["src/test/**/*.{ts,tsx}"],
+
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommendedTypeChecked,
+      eslintConfigPrettier,
+    ],
+
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+
+      parserOptions: {
+        project: "./tsconfig.app.json",
+        tsconfigRootDir: PROJECT_DIRECTORY,
+      },
+    },
+
+    rules: {
+      "@typescript-eslint/no-magic-numbers": "off",
+
+      "@typescript-eslint/consistent-type-assertions": "off",
+
+      "@typescript-eslint/no-unnecessary-type-assertion": "off",
+
+      "max-lines-per-function": "off",
+
+      "max-statements": "off",
+
+      "unicorn/consistent-function-scoping": "off",
+
+      "unicorn/no-useless-undefined": "off",
+
+      "react-refresh/only-export-components": "off",
+    },
+  },
+
+  {
+    files: ["vitest.config.ts"],
+
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      eslintConfigPrettier,
+    ],
+
+    languageOptions: {
+      globals: globals.node,
+
+      parserOptions: {
+        project: "./tsconfig.node.json",
+        tsconfigRootDir: PROJECT_DIRECTORY,
+      },
+    },
+  },
 ]);

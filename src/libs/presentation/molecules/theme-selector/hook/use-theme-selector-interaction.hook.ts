@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { closeThemeSelector } from "../utils/close-theme-selector.util";
+import { DEFAULT_PLACEMENT } from "../constants/theme-selector.constants";
 import {
-  DEFAULT_PLACEMENT,
   resolveThemeSelectorPlacement,
   type UseThemeSelectorInteractionProps,
   type UseThemeSelectorInteractionReturn,
