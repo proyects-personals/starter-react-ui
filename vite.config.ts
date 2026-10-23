@@ -4,9 +4,9 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import dts from "unplugin-dts/vite";
 
-const SRC_DIRECTORY = fileURLToPath(new URL("./src/", import.meta.url));
+const SRC_DIRECTORY = fileURLToPath(new URL("./src", import.meta.url));
 const LIBS_DIRECTORY = fileURLToPath(new URL("./src/libs/", import.meta.url));
-const OUTPUT_DIRECTORY = fileURLToPath(new URL("./dist/", import.meta.url));
+const OUTPUT_DIRECTORY = fileURLToPath(new URL("./dist", import.meta.url));
 const TYPESCRIPT_CONFIG = fileURLToPath(
   new URL("./tsconfig.types.json", import.meta.url),
 );

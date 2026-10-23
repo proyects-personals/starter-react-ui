@@ -1,35 +1,13 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type RefObject,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { closeThemeSelector } from "../utils/close-theme-selector.util";
-
-/**
- * @description Define las propiedades del hook de interaccion.
- * @author Steveen Cues
- * @version 1.0.0
- */
-export interface UseThemeSelectorInteractionProps {
-  readonly onSelectTheme: (themeName: string) => void;
-}
-
-/**
- * @description Define el estado y las acciones del selector de temas.
- * @author Steveen Cues
- * @version 1.0.0
- */
-export interface UseThemeSelectorInteractionReturn {
-  readonly isOpen: boolean;
-  readonly search: string;
-  readonly containerRef: RefObject<HTMLDivElement | null>;
-  readonly handleToggle: () => void;
-  readonly handleSearchChange: (value: string) => void;
-  readonly handleSelectTheme: (themeName: string) => void;
-}
+import {
+  DEFAULT_PLACEMENT,
+  resolveThemeSelectorPlacement,
+  type UseThemeSelectorInteractionProps,
+  type UseThemeSelectorInteractionReturn,
+  type ThemeSelectorPlacement,
+} from "@presentation";
 
 /**
  * @description Gestiona las interacciones y el ciclo de vida del selector.
@@ -37,23 +15,49 @@ export interface UseThemeSelectorInteractionReturn {
  * @param props.onSelectTheme Callback que se ejecuta al seleccionar un tema.
  * @returns Estado, referencia y acciones del selector.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.2.0
  */
 export const useThemeSelectorInteraction = ({
   onSelectTheme,
 }: UseThemeSelectorInteractionProps): UseThemeSelectorInteractionReturn => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [placement, setPlacement] = useState<ThemeSelectorPlacement | null>(
+    null,
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback((): void => {
     closeThemeSelector(setIsOpen, setSearch);
+    setPlacement(null);
   }, []);
 
   const handleToggle = useCallback((): void => {
-    setIsOpen((previousState) => !previousState);
-    setSearch("");
+    setIsOpen((previousState) => {
+      const nextState = !previousState;
+
+      if (nextState) {
+        setSearch("");
+        const container = containerRef.current;
+
+        if (container) {
+          setPlacement(
+            resolveThemeSelectorPlacement({
+              container: container.getBoundingClientRect(),
+              viewport: {
+                width: window.innerWidth,
+                height: window.innerHeight,
+              },
+            }),
+          );
+        }
+      } else {
+        setPlacement(null);
+      }
+
+      return nextState;
+    });
   }, []);
 
   const handleSearchChange = useCallback((value: string): void => {
@@ -88,12 +92,32 @@ export const useThemeSelectorInteraction = ({
       }
     };
 
+    const updatePlacement = (): void => {
+      const container = containerRef.current;
+
+      if (container) {
+        setPlacement(
+          resolveThemeSelectorPlacement({
+            container: container.getBoundingClientRect(),
+            viewport: {
+              width: window.innerWidth,
+              height: window.innerHeight,
+            },
+          }),
+        );
+      }
+    };
+
     document.addEventListener("pointerdown", handleOutsidePointerDown);
     document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", updatePlacement);
+    window.addEventListener("scroll", updatePlacement, true);
 
     return (): void => {
       document.removeEventListener("pointerdown", handleOutsidePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", updatePlacement);
+      window.removeEventListener("scroll", updatePlacement, true);
     };
   }, [handleClose, isOpen]);
 
@@ -101,7 +125,9 @@ export const useThemeSelectorInteraction = ({
     isOpen,
     search,
     containerRef,
+    placement: placement ?? DEFAULT_PLACEMENT,
     handleToggle,
+    handleClose,
     handleSearchChange,
     handleSelectTheme,
   };

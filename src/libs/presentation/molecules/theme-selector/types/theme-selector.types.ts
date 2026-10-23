@@ -1,9 +1,10 @@
 import type { AppTheme } from "@domain";
+import type { RefObject } from "react";
 
 /**
  * @description Define las claves de traduccion configurables del selector de temas.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export interface ThemeSelectorTranslations {
   readonly title?: string;
@@ -12,12 +13,13 @@ export interface ThemeSelectorTranslations {
   readonly empty?: string;
   readonly of?: string;
   readonly results?: string;
+  readonly close?: string;
 }
 
 /**
  * @description Define los textos traducidos que recibe el panel.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export interface ThemeSelectorPanelTranslations {
   readonly title: string;
@@ -25,6 +27,7 @@ export interface ThemeSelectorPanelTranslations {
   readonly empty: string;
   readonly of: string;
   readonly results: string;
+  readonly close: string;
 }
 
 /**
@@ -64,9 +67,20 @@ export interface ThemeSelectorSearchProps {
 }
 
 /**
+ * @description Define la colocacion dinamica del panel desplegable.
+ * @author Steveen Cues
+ * @version 1.2.0
+ */
+export interface ThemeSelectorPlacement {
+  readonly vertical: "top" | "bottom";
+  readonly horizontal: "left" | "right";
+  readonly maxHeight: number;
+}
+
+/**
  * @description Define las propiedades del panel desplegable de temas.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.2.0
  */
 export interface ThemeSelectorPanelProps {
   readonly themes: readonly AppTheme[];
@@ -77,8 +91,10 @@ export interface ThemeSelectorPanelProps {
   readonly label: string;
   readonly showDescriptions: boolean;
   readonly translations: ThemeSelectorPanelTranslations;
+  readonly placement: ThemeSelectorPlacement;
   readonly onSearchChange: (value: string) => void;
   readonly onSelectTheme: (themeName: string) => void;
+  readonly onClose: () => void;
 }
 
 /**
@@ -126,4 +142,29 @@ export interface ThemeSelectorTriggerProps {
   readonly isOpen: boolean;
   readonly selectedLabel: string;
   readonly onToggle: () => void;
+}
+
+/**
+ * @description Define las propiedades del hook de interaccion.
+ * @author Steveen Cues
+ * @version 1.1.0
+ */
+export interface UseThemeSelectorInteractionProps {
+  readonly onSelectTheme: (themeName: string) => void;
+}
+
+/**
+ * @description Define el estado y las acciones del selector de temas.
+ * @author Steveen Cues
+ * @version 1.2.0
+ */
+export interface UseThemeSelectorInteractionReturn {
+  readonly isOpen: boolean;
+  readonly search: string;
+  readonly containerRef: RefObject<HTMLDivElement | null>;
+  readonly placement: ThemeSelectorPlacement;
+  readonly handleToggle: () => void;
+  readonly handleClose: () => void;
+  readonly handleSearchChange: (value: string) => void;
+  readonly handleSelectTheme: (themeName: string) => void;
 }
