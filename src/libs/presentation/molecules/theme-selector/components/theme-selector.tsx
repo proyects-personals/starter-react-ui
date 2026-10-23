@@ -15,7 +15,7 @@ import {
  * @description Permite buscar, visualizar y seleccionar temas disponibles.
  * Prioriza el tema seleccionado sin perder los demas temas filtrados.
  * @author Steveen Cues
- * @version 3.5.0
+ * @version 3.6.0
  */
 export const ThemeSelector: FC<ThemeSelectorProps> = ({
   label = "theme.title",
@@ -31,7 +31,9 @@ export const ThemeSelector: FC<ThemeSelectorProps> = ({
     isOpen,
     search,
     containerRef,
+    placement,
     handleToggle,
+    handleClose,
     handleSearchChange,
     handleSelectTheme,
   } = useThemeSelectorInteraction({
@@ -67,8 +69,10 @@ export const ThemeSelector: FC<ThemeSelectorProps> = ({
           label={messages.title}
           showDescriptions={showDescriptions}
           translations={messages}
+          placement={placement}
           onSearchChange={handleSearchChange}
           onSelectTheme={handleSelectTheme}
+          onClose={handleClose}
         />
       )}
     </div>

@@ -4,7 +4,7 @@ import type { FC, JSX } from "react";
 /**
  * @description Permite buscar temas por nombre o descripcion.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const ThemeSelectorSearch: FC<ThemeSelectorSearchProps> = ({
   value,
@@ -12,7 +12,7 @@ export const ThemeSelectorSearch: FC<ThemeSelectorSearchProps> = ({
   onChange,
 }): JSX.Element => {
   return (
-    <label className="input input-bordered flex w-full items-center gap-2 rounded-xl">
+    <label className="input input-bordered flex h-10 w-full items-center gap-2 rounded-xl">
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"

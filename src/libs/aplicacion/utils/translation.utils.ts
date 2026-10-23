@@ -13,7 +13,7 @@ import {
  * @param language Codigo del idioma.
  * @returns Indica si el idioma esta registrado.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 function isLanguageAvailable(
   translations: TranslationCatalog,
@@ -27,7 +27,7 @@ function isLanguageAvailable(
  * @param translations Catalogo de traducciones.
  * @returns Codigo del primer idioma o undefined si esta vacio.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 function findFirstLanguage(
   translations: TranslationCatalog,
@@ -46,7 +46,7 @@ function findFirstLanguage(
  * @returns Codigo del idioma inicial disponible.
  * @throws Error cuando el catalogo esta vacio.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 export function resolveInitialLanguage(
   translations: TranslationCatalog,
@@ -81,7 +81,7 @@ export function resolveInitialLanguage(
  * @param fallbackLanguage Idioma de respaldo.
  * @returns Codigo del idioma activo.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 export function resolveActiveLanguage(
   translations: TranslationCatalog,
@@ -107,7 +107,7 @@ export function resolveActiveLanguage(
  * @returns No devuelve ningun valor.
  * @throws Error cuando el idioma no esta disponible.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 export function assertLanguageExists(
   translations: TranslationCatalog,
@@ -129,7 +129,7 @@ export function assertLanguageExists(
  * @param key Clave de traduccion.
  * @returns Valor encontrado o undefined si no existe.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 function findTranslationValue(
   dictionary: TranslationDictionary,
@@ -158,7 +158,7 @@ function findTranslationValue(
  * @param key Clave con notacion de puntos.
  * @returns Traduccion encontrada o undefined.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 export function findTranslation(
   dictionary: TranslationDictionary | undefined,
@@ -181,7 +181,7 @@ export function findTranslation(
  * @param params Parametros disponibles.
  * @returns Valor interpolado o marcador original.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 function resolveInterpolationValue(
   placeholder: string,
@@ -199,7 +199,7 @@ function resolveInterpolationValue(
  * @param params Valores disponibles para la interpolacion.
  * @returns Mensaje con los parametros sustituidos.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 export function interpolateTranslation(
   message: string,
@@ -225,7 +225,7 @@ export function interpolateTranslation(
  * @param key Clave de traduccion.
  * @returns Traduccion encontrada o clave original.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 function resolveTranslationMessage(
   currentDictionary: TranslationDictionary | undefined,
@@ -251,7 +251,7 @@ function resolveTranslationMessage(
  * @param params Parametros de interpolacion.
  * @returns Mensaje final traducido e interpolado.
  * @author Steveen Cues
- * @version 2.0.0
+ * @version 2.1.0
  */
 export function translateMessage(
   currentDictionary: TranslationDictionary | undefined,

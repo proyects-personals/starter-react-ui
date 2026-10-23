@@ -45,4 +45,5 @@ export const translateThemeSelectorMessages = (
     "theme.results",
     translate,
   ),
+  close: resolveTranslation(translations?.close, "theme.close", translate),
 });

@@ -7,7 +7,7 @@ import {
 /**
  * @description Renderiza la lista desplazable de temas disponibles.
  * @author Steveen Cues
- * @version 1.3.0
+ * @version 1.4.0
  */
 export const ThemeSelectorList: FC<ThemeSelectorListProps> = ({
   themes,
@@ -33,7 +33,7 @@ export const ThemeSelectorList: FC<ThemeSelectorListProps> = ({
       aria-label={label}
       className="
         min-h-0 flex-1 space-y-1
-        overflow-x-hidden overflow-y-auto p-2
+        overflow-x-hidden overflow-y-auto overscroll-contain p-2
       "
     >
       {themes.map((availableTheme) => (
